@@ -19,7 +19,6 @@ export default defineConfig({
         "base-x",
         "bs58",
         "borsh",
-        "@solana/buffer-layout",
         "stream",
         "buffer",
         "querystring",
