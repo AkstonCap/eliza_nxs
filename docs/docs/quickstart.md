@@ -7,9 +7,8 @@ sidebar_position: 2
 ## Prerequisites
 
 Before getting started with Eliza, ensure you have:
-
-- [Node.js 23.3.0](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
-- [pnpm](https://pnpm.io/installation)
+- [Node.js 23+](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+- [pnpm 9+](https://pnpm.io/installation)
 - Git for version control
 - A code editor ([VS Code](https://code.visualstudio.com/) or [VSCodium](https://vscodium.com) recommended)
 - [CUDA Toolkit](https://developer.nvidia.com/cuda-toolkit) (optional, for GPU acceleration)
@@ -35,14 +34,28 @@ Before getting started with Eliza, ensure you have:
    Switch to latest tagged release
 
    ```bash
-   git checkout v0.0.10
+    # Checkout the latest release
+    # This project iterates fast, so we recommend checking out the latest release
+    git checkout $(git describe --tags --abbrev=0)
    ```
 
-   Install dependencies
+   Install dependencies (on initial run)
 
    ```bash
-   pnpm install
+   pnpm install --no-frozen-lockfile
    ```
+
+   # Quickstart Guide Update
+
+**Important Note on pnpm Lockfile Management**
+
+By default, the `pnpm` lockfile will not be updated during installations based off of .npmrc frozen-lockfile=true. To update the lockfile, you need to run the command:
+
+```bash
+pnpm install --no-frozen-lockfile
+```
+
+Please only use this command when you initially instantiating the repo or are bumping the version of a package or adding a new package to your package.json. This practice helps maintain consistency in your project's dependencies and prevents unintended changes to the lockfile.
 
    Build the local libraries
 
@@ -75,7 +88,7 @@ Before getting started with Eliza, ensure you have:
 Eliza supports multiple AI models:
 
 - **Heurist**: Set `modelProvider: "heurist"` in your character file. Most models are uncensored.
-  - LLM: Select available LLMs [here](https://docs.heurist.ai/dev-guide/supported-models#large-language-models-llms) and configure `SMALL_HEURIST_LANGUAGE_MODEL`,`MEDIUM_HEURIST_LANGUAGE_MODEL`,`LARGE_HEURIST_LANGUAGE_MODEL`
+  - LLM: Select available LLMs [here](https://docs.heurist.ai/dev-guide/supported-models#large-language-models-llms) and configure `SMALL_HEURIST_MODEL`,`MEDIUM_HEURIST_MODEL`,`LARGE_HEURIST_MODEL`
   - Image Generation: Select available Stable Diffusion or Flux models [here](https://docs.heurist.ai/dev-guide/supported-models#image-generation-models) and configure `HEURIST_IMAGE_MODEL` (default is FLUX.1-dev)
 - **Llama**: Set `XAI_MODEL=meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo`
 - **Grok**: Set `XAI_MODEL=grok-beta`
@@ -122,6 +135,22 @@ You set which model to use inside the character JSON file
    pnpm start --characters="characters/trump.character.json,characters/tate.character.json"
    ```
 
+3. **Interact with the Agent**
+
+   Now you're ready to start a conversation with your agent!
+   Open a new terminal window
+
+   ```bash
+   pnpm start:client
+   ```
+
+   Once the client is running, you'll see a message like this:
+```
+➜  Local:   http://localhost:5173/
+```
+
+   Simply click the link or open your browser to `http://localhost:5173/`. You'll see the chat interface connect to the system, and you can begin interacting with your character.
+
 ## Platform Integration
 
 ### Discord Bot Setup
@@ -151,8 +180,6 @@ TWITTER_COOKIES='[{"key":"auth_token","value":"your token","domain":".twitter.co
   {"key":"ct0","value":"your ct0","domain":".twitter.com"},
   {"key":"guest_id","value":"your guest_id","domain":".twitter.com"}]'
 ```
-
-Using TWITTER_COOKIES makes providing TWITTER_PASSWORD and TWITTER_EMAIL unnecessary. TWITTER_USERNAME is still required.
 
 ### Telegram Bot
 

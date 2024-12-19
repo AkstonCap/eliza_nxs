@@ -1,4 +1,4 @@
-[@ai16z/eliza v0.1.4-alpha.3](../index.md) / Models
+[@ai16z/eliza v0.1.5-alpha.5](../index.md) / Models
 
 # Type Alias: Models
 
@@ -31,6 +31,10 @@ Model configurations by provider
 ### llama\_cloud
 
 > **llama\_cloud**: [`Model`](Model.md)
+
+### together
+
+> **together**: [`Model`](Model.md)
 
 ### llama\_local
 
@@ -67,6 +71,30 @@ Model configurations by provider
 ### falai
 
 > **falai**: [`Model`](Model.md)
+
+### gaianet
+
+> **gaianet**: [`Model`](Model.md)
+
+### ali\_bailian
+
+> **ali\_bailian**: [`Model`](Model.md)
+
+### volengine
+
+> **volengine**: [`Model`](Model.md)
+
+### nanogpt
+
+> **nanogpt**: [`Model`](Model.md)
+
+### hyperbolic
+
+> **hyperbolic**: [`Model`](Model.md)
+
+### venice
+
+> **venice**: [`Model`](Model.md)
 
 ## Defined in
 

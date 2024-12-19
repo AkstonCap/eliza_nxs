@@ -2,6 +2,7 @@ import { IAgentRuntime, Memory, Provider, State } from "@ai16z/eliza";
 import { Connection, PublicKey } from "@solana/web3.js";
 import BigNumber from "bignumber.js";
 import NodeCache from "node-cache";
+import { getWalletKey } from "../keypairUtils";
 
 // Provider configuration
 const PROVIDER_CONFIG = {
@@ -370,10 +371,7 @@ const walletProvider: Provider = {
         _state?: State
     ): Promise<string | null> => {
         try {
-            const publicKey = runtime.getSetting("SOLANA_PUBLIC_KEY");
-            if (!publicKey) {
-                throw new Error("SOLANA_PUBLIC_KEY not configured");
-            }
+            const { publicKey } = await getWalletKey(runtime, false);
 
             const connection = new Connection(
                 runtime.getSetting("RPC_URL") || PROVIDER_CONFIG.DEFAULT_RPC
@@ -381,7 +379,7 @@ const walletProvider: Provider = {
 
             const provider = new WalletProvider(
                 connection,
-                new PublicKey(publicKey)
+                publicKey
             );
 
             return await provider.getFormattedPortfolio(runtime);

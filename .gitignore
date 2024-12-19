@@ -3,6 +3,8 @@ node_modules
 
 .env
 .env.production
+.env.local
+.env_main
 concatenated-output.ts
 embedding-cache.json
 packages/plugin-buttplug/intiface-engine
@@ -44,4 +46,9 @@ cache/*
 packages/plugin-coinbase/src/plugins/transactions.csv
 packages/plugin-coinbase/package-lock.json
 
+tsup.config.bundled_*.mjs
+
 .turbo
+
+coverage
+.eslintcache
